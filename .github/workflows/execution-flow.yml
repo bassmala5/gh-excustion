@@ -5,7 +5,7 @@ on:
       - master 
 jobs:
   lint:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Get code
         uses: actions/checkout@v4
@@ -20,7 +20,7 @@ jobs:
       - name: Lint code
         run: npm run lint
   test:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Get code
         uses: actions/checkout@v4
@@ -36,14 +36,14 @@ jobs:
         id: run-tests
         run: npm run test
       - name: Upload test report
-        if: failure() && steps.run-tests.outcome =='failure'
+        if: failure() 
         uses: actions/upload-artifact@v4
         with:
           name: test-report
           path: test.json
   build:
     needs: test
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Get code
         uses: actions/checkout@v4
@@ -65,7 +65,7 @@ jobs:
           path: dist
   deploy:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Get build artifacts
         uses: actions/download-artifact@v4
