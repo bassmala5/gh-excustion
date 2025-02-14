@@ -16,6 +16,7 @@ jobs:
           path: ~/.npm
           key: deps-node-modules-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
+            deps-node-modules-${{ runner.os }}-
             deps-node-modules-
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
